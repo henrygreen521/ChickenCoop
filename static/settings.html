@@ -77,6 +77,45 @@
   <div class="f-nav"></div>
   <div class="main">
     <div class="settings-container">
+      
+      <!-- Widgets Settings Card (Clock & Weather) -->
+      <div class="settings-card">
+        <h3>Widgets</h3>
+        <p>Manage your homepage widgets and custom displays.</p>
+        
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
+          <span style="color: #fff; font-size: 0.95rem;">Show Clock & Date Widget</span>
+          <label class="switch">
+            <input type="checkbox" class="slider-checkbox" id="clock-widget-switch" onchange="toggleClockWidget()" />
+            <span class="slider-round"></span>
+          </label>
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
+          <span style="color: #fff; font-size: 0.95rem;">24-Hour Time Format</span>
+          <label class="switch">
+            <input type="checkbox" class="slider-checkbox" id="time-format-switch" onchange="toggleTimeFormat()" />
+            <span class="slider-round"></span>
+          </label>
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+          <span style="color: #fff; font-size: 0.95rem;">Show Weather Widget</span>
+          <label class="switch">
+            <input type="checkbox" class="slider-checkbox" id="weather-widget-switch" onchange="toggleWeatherWidget()" />
+            <span class="slider-round"></span>
+          </label>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="color: #aaa; font-size: 0.85rem;">Weather Location (City or Zip Code)</span>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="weather-location-input" placeholder="e.g. Pine Bush, NY" class="key-form" style="margin: 0; flex: 1;" />
+            <button class="key-button" onclick="saveWeatherLocation()" style="margin: 0; width: 80px;">Save</button>
+          </div>
+        </div>
+      </div>
+
       <div class="settings-card">
         <h3>About:Blank</h3>
         <p>
@@ -303,7 +342,57 @@
       navigator.serviceWorker.register("../sw.js?v=2025-04-15", {
         scope: "/a/",
       });
+      
+      // Initialize toggle states & inputs from localStorage
+      const clockSwitch = document.getElementById('clock-widget-switch');
+      if (clockSwitch) {
+        clockSwitch.checked = localStorage.getItem('coop_clock_widget') !== 'false'; // enabled by default
+      }
+      
+      const formatSwitch = document.getElementById('time-format-switch');
+      if (formatSwitch) {
+        formatSwitch.checked = localStorage.getItem('coop_24hr_format') === 'true';
+      }
+
+      const weatherSwitch = document.getElementById('weather-widget-switch');
+      if (weatherSwitch) {
+        weatherSwitch.checked = localStorage.getItem('coop_weather_widget') === 'true';
+      }
+
+      const locationInput = document.getElementById('weather-location-input');
+      if (locationInput) {
+        locationInput.value = localStorage.getItem('coop_weather_location') || '';
+      }
     });
+
+    function toggleClockWidget() {
+      const clockSwitch = document.getElementById('clock-widget-switch');
+      if (clockSwitch) {
+        localStorage.setItem('coop_clock_widget', clockSwitch.checked);
+      }
+    }
+
+    function toggleTimeFormat() {
+      const formatSwitch = document.getElementById('time-format-switch');
+      if (formatSwitch) {
+        localStorage.setItem('coop_24hr_format', formatSwitch.checked);
+      }
+    }
+
+    function toggleWeatherWidget() {
+      const weatherSwitch = document.getElementById('weather-widget-switch');
+      if (weatherSwitch) {
+        localStorage.setItem('coop_weather_widget', weatherSwitch.checked);
+      }
+    }
+
+    function saveWeatherLocation() {
+      const locationInput = document.getElementById('weather-location-input');
+      if (locationInput) {
+        localStorage.setItem('coop_weather_location', locationInput.value.trim());
+        alert('Weather location saved!');
+      }
+    }
 
     function checkSecretCode() {
       const input = document.getElementById("secretCodeInput").value.trim();
