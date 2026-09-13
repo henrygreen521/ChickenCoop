@@ -78,44 +78,6 @@
   <div class="main">
     <div class="settings-container">
       
-      <!-- Widgets Settings Card (Clock & Weather) -->
-      <div class="settings-card">
-        <h3>Widgets</h3>
-        <p>Manage your homepage widgets and custom displays.</p>
-        
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
-          <span style="color: #fff; font-size: 0.95rem;">Show Clock & Date Widget</span>
-          <label class="switch">
-            <input type="checkbox" class="slider-checkbox" id="clock-widget-switch" onchange="toggleClockWidget()" />
-            <span class="slider-round"></span>
-          </label>
-        </div>
-
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
-          <span style="color: #fff; font-size: 0.95rem;">24-Hour Time Format</span>
-          <label class="switch">
-            <input type="checkbox" class="slider-checkbox" id="time-format-switch" onchange="toggleTimeFormat()" />
-            <span class="slider-round"></span>
-          </label>
-        </div>
-
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-          <span style="color: #fff; font-size: 0.95rem;">Show Weather Widget</span>
-          <label class="switch">
-            <input type="checkbox" class="slider-checkbox" id="weather-widget-switch" onchange="toggleWeatherWidget()" />
-            <span class="slider-round"></span>
-          </label>
-        </div>
-
-        <div style="display: flex; flex-direction: column; gap: 8px;">
-          <span style="color: #aaa; font-size: 0.85rem;">Weather Location (City or Zip Code)</span>
-          <div style="display: flex; gap: 10px;">
-            <input type="text" id="weather-location-input" placeholder="e.g. New York, NY" class="key-form" style="margin: 0; flex: 1;" />
-            <button class="key-button" onclick="saveWeatherLocation()" style="margin: 0; width: 80px;">Save</button>
-          </div>
-        </div>
-      </div>
-
       <div class="settings-card">
         <h3>About:Blank</h3>
         <p>
@@ -132,6 +94,7 @@
           <button onclick="AB()" class="key-button">Open Popup</button>
         </div>
       </div>
+
       <div class="settings-card">
         <h3>Set Panic Key</h3>
         <p>
@@ -145,6 +108,7 @@
           Save
         </button>
       </div>
+
       <div class="settings-card">
         <h3>&#84;&#97;&#98;&#32;&#67;&#108;&#111;&#97;&#107;&#101;&#114;</h3>
         <p>Change the title and icon of the page.</p>
@@ -242,6 +206,7 @@
           </button>
         </div>
       </div>
+
       <div class="settings-card">
         <h3>Set Background Image</h3>
         <p>Change the site's background image.</p>
@@ -249,6 +214,7 @@
         <button class="key-button" id="save-button">Save</button>
         <button class="key-button" id="reset-button">Reset</button>
       </div>
+
       <div class="settings-card">
         <h3>Search Engine</h3>
         <p>Change the search engine when searching.</p>
@@ -266,6 +232,7 @@
           Save
         </button>
       </div>
+
       <div class="settings-card">
         <h3>Choose your <an>Pro</an>xy</h3>
         <p>
@@ -277,44 +244,7 @@
           <option value="dy">Dynamic (Doesn't work in about:blank)</option>
         </select>
       </div>
-      <div class="settings-card">
-        <h3>Particles</h3>
-        <p>
-          Add the particles that are from the previous version to the new
-          site.
-        </p>
-        <label class="switch">
-          <input type="checkbox" class="slider-checkbox" id="2" />
-          <span class="slider-round"></span>
-        </label>
-      </div>
-      <div class="settings-card">
-        <h3>Themes!</h3>
-        <p>Pick from a variety of themes to customize your experience.</p>
-        <select placeholder="Solid Color Themes" id="dropdown" class="td" onchange="themeChange(this)">
-          <option disabled selected>Solid Color Themes</option>
-          <option value="d">Default</option>
-          <option value="Inverted">Inverted</option>
-          <option value="sky">Sky</option>
-          <option disabled selected>Catppuccin Themes</option>
-          <option value="catppuccinMocha">Mocha</option>
-          <option value="catppuccinMacchiato">Macchiato</option>
-          <option value="catppuccinFrappe">Frappe</option>
-          <option value="catppuccinLatte">Latte</option>
-          <option disabled selected>Custom Themes</option>
-        </select>
-      </div>
-      <div class="settings-card">
-        <h3>Save Data Management</h3>
-        <p>Export your saved data on this site and import it on another site.
-          This is useful because this site might be blocked in the future,
-          but you don't want to lose your save data.
-        </p>
-        <p id="warning">Importing a save file will overwrite your current saves!</p>
-        <button class="key-button" value="Export" onclick="exportSaveData();">Export Save</button>
-        <button class="key-button" value="Import" onclick="importSaveData();">Import Save</button>
-      </div>
-      
+
       <div class="settings-card">
         <h3>Secret Unlock</h3>
         <p>Enter the secret code to reveal a surprise.</p>
@@ -337,62 +267,13 @@
       </div>
     </div>
   </div>
+
   <script>
     window.addEventListener("load", () => {
       navigator.serviceWorker.register("../sw.js?v=2025-04-15", {
         scope: "/a/",
       });
-      
-      // Initialize toggle states & inputs from localStorage
-      const clockSwitch = document.getElementById('clock-widget-switch');
-      if (clockSwitch) {
-        clockSwitch.checked = localStorage.getItem('coop_clock_widget') !== 'false'; // enabled by default
-      }
-      
-      const formatSwitch = document.getElementById('time-format-switch');
-      if (formatSwitch) {
-        formatSwitch.checked = localStorage.getItem('coop_24hr_format') === 'true';
-      }
-
-      const weatherSwitch = document.getElementById('weather-widget-switch');
-      if (weatherSwitch) {
-        weatherSwitch.checked = localStorage.getItem('coop_weather_widget') === 'true';
-      }
-
-      const locationInput = document.getElementById('weather-location-input');
-      if (locationInput) {
-        locationInput.value = localStorage.getItem('coop_weather_location') || '';
-      }
     });
-
-    function toggleClockWidget() {
-      const clockSwitch = document.getElementById('clock-widget-switch');
-      if (clockSwitch) {
-        localStorage.setItem('coop_clock_widget', clockSwitch.checked);
-      }
-    }
-
-    function toggleTimeFormat() {
-      const formatSwitch = document.getElementById('time-format-switch');
-      if (formatSwitch) {
-        localStorage.setItem('coop_24hr_format', formatSwitch.checked);
-      }
-    }
-
-    function toggleWeatherWidget() {
-      const weatherSwitch = document.getElementById('weather-widget-switch');
-      if (weatherSwitch) {
-        localStorage.setItem('coop_weather_widget', weatherSwitch.checked);
-      }
-    }
-
-    function saveWeatherLocation() {
-      const locationInput = document.getElementById('weather-location-input');
-      if (locationInput) {
-        localStorage.setItem('coop_weather_location', locationInput.value.trim());
-        alert('Weather location saved!');
-      }
-    }
 
     function checkSecretCode() {
       const input = document.getElementById("secretCodeInput").value.trim();
