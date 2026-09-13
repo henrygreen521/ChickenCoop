@@ -538,20 +538,6 @@
 
         let currentActiveItem = null;
 
-        function getProxyUrl(rawUrl) {
-            try {
-                if (typeof __uv$config !== 'undefined' && typeof __uv$config.encodeUrl === 'function' && typeof __uv$config.prefix === 'string') {
-                    return __uv$config.prefix + __uv$config.encodeUrl(rawUrl);
-                }
-            } catch (e) {}
-
-            if (window.location.pathname.startsWith('/service/')) {
-                return '/service/' + encodeURIComponent(rawUrl);
-            }
-
-            return rawUrl;
-        }
-
         function loadMedia(item) {
             if (!item || !item.id) return;
 
@@ -579,7 +565,7 @@
                 if (episodesPanel) episodesPanel.style.display = 'none';
             }
 
-            if (frame) frame.src = getProxyUrl(targetUrl);
+            if (frame) frame.src = targetUrl;
             updateStarState();
             renderLibrary();
         }
@@ -686,7 +672,7 @@
                 btn.innerText = ep;
                 btn.onclick = () => {
                     const targetUrl = `https://vidsrcme.ru/embed/tv/${show.id}/${seasonNum}/${ep}`;
-                    if (frame) frame.src = getProxyUrl(targetUrl);
+                    if (frame) frame.src = targetUrl;
                     document.querySelectorAll('.ep-btn').forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
                 };
@@ -769,27 +755,6 @@
                 resultsList.appendChild(div);
             });
         }
-    </script>
-
-    <!-- Absolute Root Path Proxy Scripts & Service Worker Registration -->
-    <script src="/assets/js/mg-pxy.js"></script>
-    <script src="/assets/js/index-3.js"></script>
-    <script src="/assets/mathematics/bundle.js?v=2025-04-15"></script>
-    <script src="/assets/mathematics/config.js?v=2025-04-15"></script>
-    <script src="/assets/js/m1.js"></script>
-    <script>
-        window.addEventListener('load', async () => {
-            if ('serviceWorker' in navigator) {
-                try {
-                    await navigator.serviceWorker.register('/sw.js', {
-                        scope: typeof __uv$config !== 'undefined' ? __uv$config.prefix : '/a/'
-                    });
-                } catch (err) {
-                    console.error('UV Service Worker registration failed:', err);
-                }
-            }
-            renderLibrary();
-        });
     </script>
 </body>
 </html>
