@@ -538,6 +538,15 @@
 
         let currentActiveItem = null;
 
+        // Function to encode vidsrcme URLs through the Scramjet proxy
+        function encodeUrlThroughProxy(url) {
+            if (window.__isSj && typeof window.__isSj.encodeUrl === 'function') {
+                return window.__isSj.encodeUrl(url);
+            }
+            // Fallback if proxy is not ready
+            return url;
+        }
+
         function loadMedia(item) {
             if (!item || !item.id) return;
 
@@ -565,7 +574,9 @@
                 if (episodesPanel) episodesPanel.style.display = 'none';
             }
 
-            if (frame) frame.src = targetUrl;
+            // Encode URL through proxy
+            const proxiedUrl = encodeUrlThroughProxy(targetUrl);
+            if (frame) frame.src = proxiedUrl;
             updateStarState();
             renderLibrary();
         }
@@ -672,7 +683,9 @@
                 btn.innerText = ep;
                 btn.onclick = () => {
                     const targetUrl = `https://vidsrcme.ru/embed/tv/${show.id}/${seasonNum}/${ep}`;
-                    if (frame) frame.src = targetUrl;
+                    // Encode URL through proxy
+                    const proxiedUrl = encodeUrlThroughProxy(targetUrl);
+                    if (frame) frame.src = proxiedUrl;
                     document.querySelectorAll('.ep-btn').forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
                 };
