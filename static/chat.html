@@ -25,11 +25,11 @@
         .user-profile { padding: 15px; background: #e55c00; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #111; }
         .user-info { display: flex; align-items: center; gap: 10px; font-weight: bold; font-size: 1.1rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; cursor: pointer; }
         .user-info img { width: 35px; height: 35px; border-radius: 50%; object-fit: cover; background: #333; }
-        .logout-btn { background: #222; border: none; color: #fff; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; font-weight: bold; text-decoration: none; display: inline-block; }
+        .logout-btn { background: #222; border: none; color: #fff; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; font-weight: bold; text-decoration: none; display: inl[...]
         
         .sidebar-section-title { padding: 10px 15px; font-size: 0.8rem; text-transform: uppercase; background: #d45200; font-weight: bold; letter-spacing: 0.5px; }
         .friends-list { overflow-y: auto; flex: 1; }
-        .friend-item { padding: 12px 15px; border-bottom: 2px solid #111; cursor: pointer; display: flex; align-items: center; justify-content: space-between; font-weight: bold; transition: background 0.2s; background: #ff6600; }
+        .friend-item { padding: 12px 15px; border-bottom: 2px solid #111; cursor: pointer; display: flex; align-items: center; justify-content: space-between; font-weight: bold; transition: backgr[...]
         .friend-item:hover { background: #e55c00; }
         .friend-left { display: flex; align-items: center; gap: 10px; overflow: hidden; }
         .friend-left img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; background: #333; flex-shrink: 0; }
@@ -39,7 +39,7 @@
 
         /* Chat Area */
         .chat-area { flex: 1; display: flex; flex-direction: column; background: #333; position: relative; }
-        .chat-header { padding: 12px 15px; background: #2a2a2a; border-bottom: 2px solid #222; display: flex; justify-content: space-between; align-items: center; font-size: 1.2rem; font-weight: bold; }
+        .chat-header { padding: 12px 15px; background: #2a2a2a; border-bottom: 2px solid #222; display: flex; justify-content: space-between; align-items: center; font-size: 1.2rem; font-weight: b[...]
         .chat-header-info { display: flex; flex-direction: column; gap: 2px; }
         .chat-actions { display: flex; align-items: center; gap: 10px; }
         .call-btn { background: #444; border: none; color: #fff; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: bold; }
@@ -86,7 +86,7 @@
         .chat-input-box button.send-btn { padding: 0 20px; height: 42px; background: #ff6600; border: none; color: #fff; border-radius: 20px; cursor: pointer; font-weight: bold; }
 
         /* Right Collapsing Menu */
-        .right-menu { position: absolute; top: 0; right: -320px; width: 320px; height: 100%; background: #252525; border-left: 2px solid #111; transition: right 0.3s ease; display: flex; flex-direction: column; z-index: 50; padding: 20px; overflow-y: auto; }
+        .right-menu { position: absolute; top: 0; right: -320px; width: 320px; height: 100%; background: #252525; border-left: 2px solid #111; transition: right 0.3s ease; display: flex; flex-dire[...]
         .right-menu.open { right: 0; }
         .menu-header-row { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #444; padding-bottom: 10px; margin-bottom: 15px; }
         .right-menu h3 { margin: 0 0 10px 0; border: none; padding: 0; font-size: 1rem; }
@@ -105,14 +105,14 @@
 
         /* Profile Modal */
         #profile-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: center; z-index: 1000; }
-        .profile-card { background: #252525; border: 1px solid #444; padding: 30px; border-radius: 12px; width: 300px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+        .profile-card { background: #252525; border: 1px solid #444; padding: 30px; border-radius: 12px; width: 300px; text-align: center; display: flex; flex-direction: column; align-items: cent[...]
         .profile-card img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; background: #111; border: 2px solid #ff6600; }
         .profile-card h2 { margin: 0; font-size: 1.4rem; }
         .profile-card p { color: #aaa; font-size: 0.9rem; margin: 0; }
         .profile-card button { padding: 8px 16px; background: #ff6600; border: none; color: #fff; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 10px; }
 
         /* Call Window & Ringing Overlay */
-        #call-window { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.9); z-index: 99999; flex-direction: column; justify-content: center; align-items: center; }
+        #call-window { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.9); z-index: 99999; flex-direction: column; justify-content: center; [...]
         .video-grid { display: flex; gap: 20px; margin-bottom: 25px; flex-wrap: wrap; justify-content: center; }
         .video-grid video { width: 400px; height: 300px; background: #111; border-radius: 12px; object-fit: cover; border: 2px solid #444; }
     </style>
@@ -149,7 +149,7 @@
             <img id="call-target-pfp" src="" alt="Calling..." style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid #ff6600; background: #222;">
             <h2 id="call-status-text" style="margin: 0; font-size: 1.5rem;">Calling...</h2>
             <p id="call-target-username" style="color: #aaa; font-size: 1.1rem; margin: 0;"></p>
-            <button id="cancel-call-btn" onclick="cancelOrEndCall()" style="background: #e74c3c; border: none; color: white; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px;">Cancel Call</button>
+            <button id="cancel-call-btn" onclick="cancelOrEndCall()" style="background: #e74c3c; border: none; color: white; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: poi[...]
         </div>
 
         <!-- Active Video/Voice Stream State -->
@@ -158,18 +158,18 @@
                 <video id="local-video" autoplay muted playsinline></video>
                 <video id="remote-video" autoplay playsinline></video>
             </div>
-            <button id="end-call-btn" onclick="cancelOrEndCall()" style="background: #e74c3c; border: none; color: white; padding: 12px 24px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem;">End Call</button>
+            <button id="end-call-btn" onclick="cancelOrEndCall()" style="background: #e74c3c; border: none; color: white; padding: 12px 24px; border-radius: 8px; font-weight: bold; cursor: pointe[...]
         </div>
     </div>
 
     <!-- Incoming Call Chat Popup Banner -->
-    <div id="incoming-call-banner" style="display: none; position: fixed; top: 20px; right: 20px; background: #252525; border: 2px solid #ff6600; padding: 15px 20px; border-radius: 10px; z-index: 10000; box-shadow: 0 4px 15px rgba(0,0,0,0.5); align-items: center; gap: 15px;">
+    <div id="incoming-call-banner" style="display: none; position: fixed; top: 20px; right: 20px; background: #252525; border: 2px solid #ff6600; padding: 15px 20px; border-radius: 10px; z-index:[...]
         <img id="incoming-caller-pfp" src="" style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover; background: #111;">
         <div>
             <p id="incoming-call-text" style="margin: 0 0 5px 0; font-weight: bold; font-size: 0.95rem; color: #fff;">Incoming Call</p>
             <div style="display: flex; gap: 8px;">
-                <button onclick="acceptIncomingCall()" style="background: #2ecc71; border: none; color: #fff; padding: 5px 12px; border-radius: 4px; font-weight: bold; cursor: pointer;">Accept</button>
-                <button onclick="rejectIncomingCall()" style="background: #e74c3c; border: none; color: #fff; padding: 5px 12px; border-radius: 4px; font-weight: bold; cursor: pointer;">Reject</button>
+                <button onclick="acceptIncomingCall()" style="background: #2ecc71; border: none; color: #fff; padding: 5px 12px; border-radius: 4px; font-weight: bold; cursor: pointer;">Accept</b[...]
+                <button onclick="rejectIncomingCall()" style="background: #e74c3c; border: none; color: #fff; padding: 5px 12px; border-radius: 4px; font-weight: bold; cursor: pointer;">Reject</b[...]
             </div>
         </div>
     </div>
@@ -189,7 +189,7 @@
             <div class="sidebar-section-title">Rooms</div>
             <div class="friend-item" onclick="selectGlobalChat()">
                 <div class="friend-left">
-                    <div style="width: 30px; height: 30px; border-radius: 50%; background: #ff6600; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #fff;">G</div>
+                    <div style="width: 30px; height: 30px; border-radius: 50%; background: #ff6600; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #fff;">G[...]
                     <span>Global Chatroom</span>
                 </div>
             </div>
@@ -265,7 +265,8 @@
     </div>
 
     <script>
-        const BACKEND_URL = "https://chickencoop-chat-server.onrender.com";
+        const RENDER_BACKEND_URL = "https://chickencoop-chat-server.onrender.com";
+        let BACKEND_URL = RENDER_BACKEND_URL; // Will be proxied if available
         let socket;
         let currentUser = null;
         let currentChatType = null; // 'global', 'dm', 'group'
@@ -290,6 +291,31 @@
             ]
         };
 
+        // Function to encode render server URLs through the Scramjet proxy
+        function encodeUrlThroughProxy(url) {
+            if (window.__isSj && typeof window.__isSj.encodeUrl === 'function') {
+                return window.__isSj.encodeUrl(url);
+            }
+            // Fallback if proxy is not ready
+            return url;
+        }
+
+        // Wait for proxy to initialize, then set the backend URL
+        async function initializeBackendUrl() {
+            // Try to wait for Scramjet to load
+            if (window.__isSjReady) {
+                try {
+                    await window.__isSjReady;
+                    BACKEND_URL = encodeUrlThroughProxy(RENDER_BACKEND_URL);
+                } catch (e) {
+                    console.warn("Scramjet proxy initialization failed, using direct URL", e);
+                    BACKEND_URL = RENDER_BACKEND_URL;
+                }
+            } else {
+                BACKEND_URL = RENDER_BACKEND_URL;
+            }
+        }
+
         function handleFilePfpUpload(event) {
             const file = event.target.files[0];
             if (!file) return;
@@ -302,6 +328,9 @@
         }
 
         async function handleAuth() {
+            // Initialize backend URL before auth
+            await initializeBackendUrl();
+
             const username = document.getElementById('username').value.trim();
             let pfp = uploadedPfpData || document.getElementById('pfp').value.trim();
             if (pfp === "[Stored Image File Selected]") pfp = uploadedPfpData;
