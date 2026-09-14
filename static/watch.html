@@ -432,6 +432,16 @@
         .delete-shortcut:hover {
             color: #ff5722;
         }
+
+        .proxy-status {
+            font-size: 0.75rem;
+            color: #2ecc71;
+            padding: 4px 8px;
+            text-align: center;
+            background: rgba(46, 204, 113, 0.1);
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
     </style>
 </head>
 <body>
@@ -480,6 +490,9 @@
                     </div>
                 </div>
 
+                <!-- Proxy Status -->
+                <div id="proxy-status" class="proxy-status" style="display: none;">⏳ Initializing proxy...</div>
+
                 <!-- Custom Direct ID Loader -->
                 <div class="panel-box">
                     <div class="sidebar-heading" style="font-size:0.9rem;">Direct ID Loader</div>
@@ -519,6 +532,8 @@
 
     <script>
         let mediaLibrary = [];
+        let proxyReady = false;
+
         try {
             const saved = localStorage.getItem('chickenCoopShortcuts');
             if (saved) mediaLibrary = JSON.parse(saved);
@@ -535,15 +550,46 @@
         const showSeasonTitle = document.getElementById('show-season-title');
         const seasonSelect = document.getElementById('season-select');
         const starBtn = document.getElementById('star-btn');
+        const proxyStatusEl = document.getElementById('proxy-status');
 
         let currentActiveItem = null;
+
+        // Initialize proxy on page load
+        async function initializeProxy() {
+            proxyStatusEl.style.display = 'block';
+            proxyStatusEl.innerHTML = '⏳ Initializing proxy...';
+
+            // Wait for Scramjet to load
+            if (window.__isSjReady) {
+                try {
+                    await window.__isSjReady;
+                    proxyReady = true;
+                    proxyStatusEl.innerHTML = '✅ Proxy ready - Videos will be unblocked';
+                    setTimeout(() => {
+                        proxyStatusEl.style.display = 'none';
+                    }, 3000);
+                } catch (e) {
+                    console.warn("Scramjet proxy initialization warning", e);
+                    proxyStatusEl.innerHTML = '⚠️ Proxy error - using fallback';
+                    setTimeout(() => {
+                        proxyStatusEl.style.display = 'none';
+                    }, 3000);
+                }
+            } else {
+                proxyReady = true;
+                proxyStatusEl.innerHTML = '✅ Proxy ready';
+                setTimeout(() => {
+                    proxyStatusEl.style.display = 'none';
+                }, 3000);
+            }
+        }
 
         // Function to encode vidsrcme URLs through the Scramjet proxy
         function encodeUrlThroughProxy(url) {
             if (window.__isSj && typeof window.__isSj.encodeUrl === 'function') {
                 return window.__isSj.encodeUrl(url);
             }
-            // Fallback if proxy is not ready
+            // Fallback if proxy is not available
             return url;
         }
 
@@ -768,6 +814,10 @@
                 resultsList.appendChild(div);
             });
         }
+
+        // Initialize proxy when page loads
+        window.addEventListener('load', initializeProxy);
+        renderLibrary();
     </script>
 </body>
 </html>
