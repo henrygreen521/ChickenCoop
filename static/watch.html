@@ -565,6 +565,7 @@
                     await window.__isSjReady;
                     proxyReady = true;
                     proxyStatusEl.innerHTML = '✅ Proxy ready - Videos will be unblocked';
+                    console.log("Scramjet proxy initialized successfully");
                     setTimeout(() => {
                         proxyStatusEl.style.display = 'none';
                     }, 3000);
@@ -584,13 +585,11 @@
             }
         }
 
-        // Function to encode vidsrcme URLs through the Scramjet proxy
-        function encodeUrlThroughProxy(url) {
-            if (window.__isSj && typeof window.__isSj.encodeUrl === 'function') {
-                return window.__isSj.encodeUrl(url);
-            }
-            // Fallback if proxy is not available
-            return url;
+        // Generate a server-side proxy URL for vidsrcme
+        function getProxiedUrl(url) {
+            // Encode the URL to pass it to the proxy route
+            const encoded = btoa(url); // Base64 encode
+            return `/a/proxy?url=${encoded}`;
         }
 
         function loadMedia(item) {
@@ -620,8 +619,8 @@
                 if (episodesPanel) episodesPanel.style.display = 'none';
             }
 
-            // Encode URL through proxy
-            const proxiedUrl = encodeUrlThroughProxy(targetUrl);
+            // Use server-side proxy URL
+            const proxiedUrl = getProxiedUrl(targetUrl);
             if (frame) frame.src = proxiedUrl;
             updateStarState();
             renderLibrary();
@@ -729,8 +728,8 @@
                 btn.innerText = ep;
                 btn.onclick = () => {
                     const targetUrl = `https://vidsrcme.ru/embed/tv/${show.id}/${seasonNum}/${ep}`;
-                    // Encode URL through proxy
-                    const proxiedUrl = encodeUrlThroughProxy(targetUrl);
+                    // Use server-side proxy URL
+                    const proxiedUrl = getProxiedUrl(targetUrl);
                     if (frame) frame.src = proxiedUrl;
                     document.querySelectorAll('.ep-btn').forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
