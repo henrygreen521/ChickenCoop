@@ -266,7 +266,7 @@
 
     <script>
         const RENDER_BACKEND_URL = "https://chickencoop-chat-server.onrender.com";
-        let BACKEND_URL = RENDER_BACKEND_URL; // Will be proxied if available
+        let BACKEND_URL = null; // Will be set after proxy is ready
         let socket;
         let currentUser = null;
         let currentChatType = null; // 'global', 'dm', 'group'
@@ -291,28 +291,24 @@
             ]
         };
 
-        // Function to encode render server URLs through the Scramjet proxy
-        function encodeUrlThroughProxy(url) {
-            if (window.__isSj && typeof window.__isSj.encodeUrl === 'function') {
-                return window.__isSj.encodeUrl(url);
-            }
-            // Fallback if proxy is not ready
-            return url;
-        }
-
-        // Wait for proxy to initialize, then set the backend URL
+        // Initialize backend URL with proxy
         async function initializeBackendUrl() {
-            // Try to wait for Scramjet to load
+            // Wait for Scramjet to load
             if (window.__isSjReady) {
                 try {
                     await window.__isSjReady;
-                    BACKEND_URL = encodeUrlThroughProxy(RENDER_BACKEND_URL);
                 } catch (e) {
-                    console.warn("Scramjet proxy initialization failed, using direct URL", e);
-                    BACKEND_URL = RENDER_BACKEND_URL;
+                    console.warn("Scramjet proxy initialization warning", e);
                 }
+            }
+            
+            // Use the proxy encoder to encode the render URL
+            if (window.__isSj && typeof window.__isSj.encodeUrl === 'function') {
+                BACKEND_URL = window.__isSj.encodeUrl(RENDER_BACKEND_URL);
+                console.log("Backend URL proxied through Scramjet");
             } else {
                 BACKEND_URL = RENDER_BACKEND_URL;
+                console.warn("Scramjet proxy not available, using direct URL");
             }
         }
 
