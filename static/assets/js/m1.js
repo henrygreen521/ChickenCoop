@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     catppuccinFrappe: "/assets/css/themes/catppuccin/frappe.css?v=00",
     catppuccinLatte: "/assets/css/themes/catppuccin/latte.css?v=00",
     Inverted: "/assets/css/themes/colors/inverted.css?v=00",
-    sky: "/assets/css/themes/colors/sky.css?v=00,
+    sky: "/assets/css/themes/colors/sky.css?v=00",
   };
 
   if (themes[themeid]) {
