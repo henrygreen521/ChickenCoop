@@ -118,7 +118,7 @@
    overflow: hidden;
 }
 
-/* Force icons and watch symbols to stay fully visible, properly sized, and spaced */
+/* Force icons to stay fully visible, properly sized, and spaced */
 .navbar-icon, 
 .f-nav-right .fa-solid, 
 .f-nav-right .material-symbols-outlined,
@@ -135,6 +135,48 @@
    margin-right: 16px !important; /* Clean gap between icon and text */
    color: var(--text-primary) !important; /* Guarantees icons stay visible */
    opacity: 1 !important;
+}
+
+/* --- PURE CSS CHAIN LINKS ICON ART --- */
+.css-chain-icon {
+   position: relative;
+   width: 24px !important;
+   height: 24px !important;
+   min-width: 24px;
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   flex-shrink: 0;
+   margin-right: 16px !important;
+   vertical-align: middle;
+}
+
+/* First Link (Top-Left loop) */
+.css-chain-icon::before {
+   content: '';
+   position: absolute;
+   top: 3px;
+   left: 2px;
+   width: 11px;
+   height: 10px;
+   border: 2px solid var(--text-primary);
+   border-radius: 5px;
+   transform: rotate(-45deg);
+   box-sizing: border-box;
+}
+
+/* Second Link (Bottom-Right interlocking loop) */
+.css-chain-icon::after {
+   content: '';
+   position: absolute;
+   bottom: 3px;
+   right: 2px;
+   width: 11px;
+   height: 10px;
+   border: 2px solid var(--text-primary);
+   border-radius: 5px;
+   transform: rotate(-45deg);
+   box-sizing: border-box;
 }
 
 /* --- BULLETPROOF ICON-VISIBLE / TEXT-HIDDEN TRICK --- */
